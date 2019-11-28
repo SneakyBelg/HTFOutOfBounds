@@ -27,7 +27,6 @@ public class Account {
         } in .close();
         String json = response.toString();
         JSONObject obj = new JSONObject(json);
-            System.out.println("JSON String Result " + response.toString());
             output = response.toString();
         } 
         else {

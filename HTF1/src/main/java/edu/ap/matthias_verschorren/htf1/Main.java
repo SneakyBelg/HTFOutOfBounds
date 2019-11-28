@@ -6,10 +6,7 @@ import org.json.JSONObject;
 
 public class Main {
     public static void main(String[] args) {
-        
-        
         try {
-            
             String json = Account.getAccountsWithMorsecode();
             JSONObject obj = new JSONObject(json);
             JSONArray jArray = obj.getJSONArray("content");
@@ -19,11 +16,12 @@ public class Main {
                 String challenge = loopObj.getString("challenge");
                 String challengeParameter;
                 if (challenge.equals("Decode the following string")) {
-                    challengeParameter = loopObj.getString("challengeParameters");
-                    System.out.println(loopObj.getString("id"));
-                    System.out.println(challengeParameter);
-                    System.out.println(MorseDecoder.decodeMorseString(challengeParameter));
+                    System.out.println(challenge);
+                    String challengeParameters = loopObj.getString("challengeParameters");
+                    System.out.println(challengeParameters);
+                    System.out.println(MorseDecoder.decodeMorseString(challengeParameters));
                 }
+                
             }
             //tring bankID = obj.getString("id");
             //String challengeParameters = obj.getString("challengeParameters");
