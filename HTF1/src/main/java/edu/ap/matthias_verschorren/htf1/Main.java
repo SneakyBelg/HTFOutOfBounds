@@ -14,12 +14,13 @@ public class Main {
             for (int i = 0; i < jArray.length(); i++){
                 JSONObject loopObj = jArray.getJSONObject(i);
                 String challenge = loopObj.getString("challenge");
-                String challengeParameter;
                 if (challenge.equals("Decode the following string")) {
                     System.out.println(challenge);
                     String challengeParameters = loopObj.getString("challengeParameters");
+                    String bankID = loopObj.getString("id");
                     System.out.println(challengeParameters);
                     System.out.println(MorseDecoder.decodeMorseString(challengeParameters));
+                    System.out.println(Account.postAnswer(bankID, MorseDecoder.decodeMorseString(challengeParameters)));
                 }
                 
             }
@@ -29,7 +30,7 @@ public class Main {
             //System.out.println(MorseDecoder.decodeMorseString(challengeParameters));
             
         }
-        catch(IOException ex) {
+        catch(Exception ex) {
             System.out.println(ex.toString());
         }
     }
