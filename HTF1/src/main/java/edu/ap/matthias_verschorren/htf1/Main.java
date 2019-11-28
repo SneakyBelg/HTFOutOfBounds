@@ -7,7 +7,7 @@ import org.json.JSONObject;
 public class Main {
     public static void main(String[] args) {
         try {
-            String json = Account.getAccountsWithMorsecode();
+            String json = Account.getAccounts();
             JSONObject obj = new JSONObject(json);
             JSONArray jArray = obj.getJSONArray("content");
             System.out.println(jArray);
@@ -20,18 +20,23 @@ public class Main {
                     String bankID = loopObj.getString("id");
                     System.out.println(challengeParameters);
                     System.out.println(MorseDecoder.decodeMorseString(challengeParameters));
-                    System.out.println(Account.postAnswer(bankID, MorseDecoder.decodeMorseString(challengeParameters)));
+                    String solvedAnswer = MorseDecoder.decodeMorseString(challengeParameters);
+                    JSONObject crackedAccount = new JSONObject(Account.postAnswer(bankID, solvedAnswer));
+                    
+                    
+                    int amountToSteal = crackedAccount.getInt("amount");
+                    Account.internalTransfer(bankID,"83ea55a9-e4e7-42e1-8b11-eb95f0777f37", amountToSteal, solvedAnswer);
                 }
                 
             }
-            //tring bankID = obj.getString("id");
-            //String challengeParameters = obj.getString("challengeParameters");
-            //System.out.println(bankID);
-            //System.out.println(MorseDecoder.decodeMorseString(challengeParameters));
-            
         }
         catch(Exception ex) {
             System.out.println(ex.toString());
         }
     }
 }
+
+
+
+
+//ONZE REKENING 83ea55a9-e4e7-42e1-8b11-eb95f0777f37 ww: zcxzrvncrkye
